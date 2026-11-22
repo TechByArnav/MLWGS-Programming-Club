@@ -7,7 +7,7 @@
   <meta name="description" content="DragonsHack is the annual MLWGS Programming Club hackathon &mdash; coming soon in late January &ndash; early February. Build, ship, compete." />
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <header class="header">
@@ -19,8 +19,8 @@
       <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="nav-links" role="navigation">
-        <ul>
+      <nav class="nav-links-wrapper">
+        <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="dragonshack.html" class="active">DragonsHack</a></li>
@@ -44,7 +44,7 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="reveal">What to Expect</h2>
+        <h2 class="reveal" style="margin-bottom: var(--s-40);">What to Expect</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-24); margin-bottom: var(--s-80);">
           <article class="card reveal">
             <h3>Build</h3>

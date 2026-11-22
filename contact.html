@@ -7,7 +7,7 @@
   <meta name="description" content="Get in touch with the MLWGS Programming Club &mdash; questions about DragonsHack, workshops, or joining the club." />
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <header class="header">
@@ -19,8 +19,8 @@
       <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="nav-links" role="navigation">
-        <ul>
+      <nav class="nav-links-wrapper">
+        <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="dragonshack.html">DragonsHack</a></li>
@@ -41,8 +41,8 @@
     <section class="section">
       <div class="container">
         <div class="contact-grid">
-          <form class="contact-form" novalidate class="reveal">
-            <h2 style="margin-top: 0; margin-bottom: var(--s-24); font-size: var(--t-sm);">Send a Message</h2>
+          <form class="contact-form reveal">
+            <h2 style="margin-bottom: var(--s-24); font-size: var(--t-h);">Send a Message</h2>
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -59,7 +59,7 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" class="btn btn-primary" style="margin-top: var(--s-16);">Send Message</button>
           </form>
 
           <div class="contact-info reveal">

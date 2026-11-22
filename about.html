@@ -7,7 +7,7 @@
   <meta name="description" content="Learn about the MLWGS Programming Club &mdash; our mission, pillars, and the students who run it." />
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <header class="header">
@@ -19,8 +19,8 @@
       <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="nav-links" role="navigation">
-        <ul>
+      <nav class="nav-links-wrapper">
+        <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html" class="active">About Us</a></li>
           <li><a href="dragonshack.html">DragonsHack</a></li>
@@ -40,13 +40,15 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="reveal">Our Mission</h2>
+        <h2 class="reveal" style="margin-bottom: var(--s-24);">Our Mission</h2>
         <p class="reveal" style="font-size: 19px; max-width: 640px; margin: 0 auto var(--s-64) auto; text-align: center; color: var(--text-muted);">
           The MLWGS Programming Club brings together students passionate about computer science to learn, build, and compete &mdash; together.
         </p>
 
-        <h3 class="reveal" style="margin-top: var(--s-48);">The Walker Way</h3>
-        <p class="reveal" style="margin-bottom: var(--s-24); font-size: 14px; color: var(--text-dim);">We operate on the four pillars of Maggie L. Walker Governor&rsquo;s School:</p>
+        <h3 class="reveal" style="margin-bottom: var(--s-24);">The Walker Way</h3>
+        <p class="reveal" style="margin-bottom: var(--s-24); font-size: 14px; color: var(--text-dim);">
+          We operate on the four pillars of Maggie L. Walker Governor&rsquo;s School:
+        </p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-24); margin-bottom: var(--s-80);">
           <article class="card reveal">
             <h3>Courage</h3>
@@ -66,7 +68,7 @@
           </article>
         </div>
 
-        <h2 class="reveal" style="margin-top: var(--s-64);">Who Runs the Club</h2>
+        <h2 class="reveal" style="margin-bottom: var(--s-32);">Who Runs the Club</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s-24);">
           <article class="card reveal">
             <h3>Arnav</h3>

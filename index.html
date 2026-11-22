@@ -7,7 +7,7 @@
   <meta name="description" content="The official programming club of Maggie L. Walker Governor's School. Learn, build, and compete at DragonsHack." />
   <meta name="theme-color" content="#000000" />
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <header class="header">
@@ -19,8 +19,8 @@
       <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="nav-links" role="navigation">
-        <ul>
+      <nav class="nav-links-wrapper">
+        <ul class="nav-links">
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="dragonshack.html">DragonsHack</a></li>
@@ -44,22 +44,22 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="reveal">What We Do</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-24); margin-top: var(--s-40);">
+        <h2 class="reveal" style="margin-bottom: var(--s-40);">What We Do</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-24);">
           <article class="card reveal">
             <h3>Weekly Workshops</h3>
             <p>Hands-on sessions covering Python, JavaScript, web development, algorithms, and more. All experience levels welcome.</p>
-            <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin: var(--s-16) 0 0 0;">Every Thursday &bull; Room 214</p>
+            <p class="meta">Every Thursday &bull; Room 214</p>
           </article>
           <article class="card reveal">
             <h3>DragonsHack</h3>
             <p>Our annual high-school hackathon. Late January &ndash; Early February. Build, ship, and compete.</p>
-            <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin: var(--s-16) 0 0 0;">Coming Soon &bull; mlwgsdragonshack.dev</p>
+            <p class="meta">Coming Soon &bull; mlwgsdragonshack.dev</p>
           </article>
           <article class="card reveal">
             <h3>Competitive Programming</h3>
             <p>USACO, Codeforces, and local contests. Train with a team that loves solving hard problems under pressure.</p>
-            <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin: var(--s-16) 0 0 0;">Weekly practice &bull; All grades</p>
+            <p class="meta">Weekly practice &bull; All grades</p>
           </article>
         </div>
       </div>

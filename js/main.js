@@ -1,6 +1,5 @@
 /* ==========================================================================
    MLWGS Programming Club — Motion & Interactions
-   Polished minimalist: scroll reveals, springy hover, smooth scroll.
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
