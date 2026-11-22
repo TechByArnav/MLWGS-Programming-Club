@@ -1,24 +1,26 @@
 /* ==========================================================================
-   MLWGS Programming Club — Design System (Sandclock-inspired)
-   Adapted from Sandclock style reference: matte black canvas, one accent,
-   hairline borders, flat surfaces, Inter typography, generous spacing.
-   Colors adapted to MLWGS: black canvas, dark green surface, golden yellow accent.
+   MLWGS Programming Club — Full Redesign
+   Palette: Pure black canvas, deep forest green, NO yellow/gold.
+   Design system tokens applied from brand-identity, accent-color-hierarchy,
+   typography-curation, niche-design-hacks, impeccable, unslop.
    ========================================================================== */
 
 /* ─────────────────────────────────────────────────────────────────────────
-   1. Tokens — Colors (MLWGS adaptation of Sandclock palette)
+   1. Tokens — Colors (Black + Deep Green only)
    ───────────────────────────────────────────────────────────────────────── */
 :root {
   /* ── Surfaces ── */
-  --color-abyss: #0a0a0a;      /* Page canvas — near-black */
-  --color-carbon: #0f1b0f;     /* Card/panel surface — dark kelly green */
-  --color-graphite: #222222;   /* Hairline borders */
-  --color-ash: #9b9b9b;        /* Muted secondary text */
-  --color-chalk: #ffffff;      /* Primary text & icons */
+  --color-canvas: #000000;       /* Pure black — full dark canvas */
+  --color-surface: #0a0a0a;      /* Card / panel surface (slightly off-black) */
+  --color-surface-elevated: #111111; /* Elevated surface */
+  --color-border: #1a1a1a;       /* Hairline borders */
+  --color-text: #e8e8e8;         /* Primary text */
+  --color-text-muted: #8a8a8a;   /* Muted secondary text */
 
-  /* ── Accent ── */
-  --color-accent: #d4af37;     /* Golden Yellow — sole chromatic accent */
-  --color-accent-text: #0a0a0a; /* Text on accent (black for contrast) */
+  /* ── Green (replaces yellow accent) ── */
+  --color-green: #004d00;        /* Deep forest green — sole chromatic color */
+  --color-green-hover: #006600;  /* Green on hover */
+  --color-green-text: #00ff00;   /* Bright green text on black (high contrast) */
 
   /* ── Typography ── */
   --font-display: 'Switzer', 'TWK Lausanne', -apple-system, BlinkMacSystemFont,
@@ -30,52 +32,37 @@
 
   --weight-regular: 400;
   --weight-medium: 500;
+  --weight-bold: 600;
 
   /* ── Type Scale ── */
-  --text-caption: 14px;
-  --leading-caption: 1.43;
-  --tracking-caption: 0.7px;
-  --text-body: 16px;
-  --leading-body: 1.5;
-  --tracking-body: 0.8px;
-  --text-subheading: 20px;
-  --leading-subheading: 1.4;
-  --tracking-subheading: 1px;
+  --text-caption: 12px;
+  --leading-caption: 1.4;
+  --text-body: 14px;
+  --leading-body: 1.6;
+  --text-subheading: 18px;
   --text-heading-sm: 24px;
-  --leading-heading-sm: 1.33;
-  --tracking-heading-sm: 1.2px;
-  --text-heading: 36px;
-  --leading-heading: 1.11;
-  --tracking-heading: 1.8px;
-  --text-display: 72px;
-  --leading-display: 1;
-  --tracking-display: -1.8px;
+  --text-heading: 32px;
+  --text-display: 64px;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
 
-  /* ── Spacing (8px base unit) ── */
+  /* ── Spacing (8px base) ── */
   --spacing-8: 8px;
   --spacing-16: 16px;
   --spacing-24: 24px;
   --spacing-32: 32px;
-  --spacing-40: 40px;
   --spacing-48: 48px;
   --spacing-64: 64px;
-  --spacing-80: 80px;
-  --spacing-112: 112px;
+  --spacing-96: 96px;
 
   /* ── Border Radius ── */
-  --radius-cards: 12px;
-  --radius-pills: 9999px;
-  --radius-buttons: 16px;
-  --radius-herobutton: 64px;
-
-  /* ── Shadows ── */
-  --shadow-subtle: rgba(24, 39, 75, 0.08) 0px 2px 3px 0px;
+  --radius-card: 12px;
+  --radius-button: 16px;
+  --radius-pill: 9999px;
 
   /* ── Layout ── */
-  --page-max-width: 1200px;
-  --section-gap: 64px;
-  --card-padding: 16px;
-  --element-gap: 16px;
+  --page-max-width: 1100px;
+  --section-gap: 80px;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -95,13 +82,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-abyss);
-  color: var(--color-chalk);
+  background-color: var(--color-canvas);
+  color: var(--color-text);
   font-family: var(--font-ui);
   font-size: var(--text-body);
   line-height: var(--leading-body);
   font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-body);
+  letter-spacing: var(--tracking-normal);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
   display: flex;
@@ -115,35 +102,38 @@ h4,
 h5,
 h6 {
   font-family: var(--font-display);
-  font-weight: var(--weight-regular);
-  line-height: var(--leading-heading);
-  letter-spacing: var(--tracking-heading);
-  color: var(--color-chalk);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
   margin: 0 0 var(--spacing-24) 0;
 }
 
 h1 {
-  font-size: var(--text-heading);
+  font-size: var(--text-display);
 }
 
 h2 {
-  font-size: var(--text-heading-sm);
+  font-size: var(--text-heading);
 }
 
 h3 {
-  font-size: var(--text-subheading);
+  font-size: var(--text-heading-sm);
 }
 
 p {
   margin: 0 0 var(--spacing-16) 0;
-  color: var(--color-chalk);
+  color: var(--color-text);
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--color-green-text);
   text-decoration: none;
-  letter-spacing: var(--tracking-body);
-  transition: color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 150ms ease;
+}
+
+a:hover {
+  color: var(--color-green-hover);
 }
 
 strong,
@@ -166,22 +156,21 @@ b {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   4. Header / Navigation (fixed per screenshot)
-   Logo left, nav links right, active = gold underline
+   4. Header / Navigation — FIXED: horizontal row, logo left, links right
    ───────────────────────────────────────────────────────────────────────── */
 .header {
   position: sticky;
   top: 0;
   z-index: 200;
-  border-bottom: 1px solid var(--color-graphite);
-  background-color: var(--color-abyss);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-canvas);
 }
 
 .nav-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 60px;
   max-width: var(--page-max-width);
   margin: 0 auto;
   padding: 0 var(--spacing-32);
@@ -194,68 +183,69 @@ b {
   gap: var(--spacing-12);
   text-decoration: none;
   font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-chalk);
-  letter-spacing: var(--tracking-body);
+  font-size: 18px;
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
 }
 
 .logo img {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   display: block;
 }
 
 .logo .brand-name {
-  color: var(--color-chalk);
+  color: var(--color-text);
 }
 
-.logo .brand-name span.accent {
-  color: var(--color-accent);
+.logo .brand-name span.green {
+  color: var(--color-green-text);
 }
 
+/* NAV LINKS — horizontal row, not stacked */
 .nav-links {
   display: flex;
+  align-items: center;
   gap: var(--spacing-32);
   list-style: none;
   margin: 0;
   padding: 0;
-  align-items: center;
 }
 
 .nav-links a {
-  color: var(--color-chalk);
-  font-size: 16px;
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-body);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-normal);
   padding: var(--spacing-8) 0;
   position: relative;
-  transition: color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 150ms ease;
 }
 
 .nav-links a:hover {
-  color: var(--color-accent);
+  color: var(--color-green-text);
 }
 
 .nav-links a.active {
-  color: var(--color-accent);
+  color: var(--color-green-text);
 }
 
 .nav-links a.active::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: -6px;
   left: 0;
   width: 100%;
-  height: 3px;
-  background-color: var(--color-accent);
+  height: 2px;
+  background-color: var(--color-green-text);
 }
 
 /* Mobile menu toggle */
 .menu-toggle {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   background: none;
   border: none;
   cursor: pointer;
@@ -265,26 +255,24 @@ b {
 
 .menu-toggle span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
-  background-color: var(--color-chalk);
+  background-color: var(--color-text);
   border-radius: 2px;
-  transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 150ms ease, opacity 150ms ease;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   5. Hero (display headline at 72px, weight 400, tight tracking)
+   5. Hero
    ───────────────────────────────────────────────────────────────────────── */
 .hero {
-  min-height: 70dvh;
+  min-height: 75dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--spacing-64) var(--spacing-32);
+  padding: var(--spacing-96) var(--spacing-32);
   position: relative;
-  overflow: hidden;
 }
 
 .hero-content {
@@ -294,25 +282,24 @@ b {
 
 .hero h1 {
   font-size: var(--text-display);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
-  font-weight: var(--weight-regular);
+  font-weight: var(--weight-bold);
   margin-bottom: var(--spacing-24);
+  letter-spacing: var(--tracking-tight);
   opacity: 0;
-  transform: translateY(12px);
-  animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(16px);
+  animation: fadeUp 600ms ease forwards;
 }
 
 .hero p {
-  font-size: var(--text-subheading);
-  color: var(--color-ash);
-  margin-bottom: var(--spacing-40);
+  font-size: 18px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-48);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   opacity: 0;
-  transform: translateY(12px);
-  animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+  transform: translateY(16px);
+  animation: fadeUp 600ms ease 100ms forwards;
 }
 
 @keyframes fadeUp {
@@ -323,7 +310,7 @@ b {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   6. Buttons (per Sandclock component spec)
+   6. Buttons (no yellow — green text on black, or black on green)
    ───────────────────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
@@ -331,69 +318,68 @@ b {
   justify-content: center;
   gap: var(--spacing-8);
   padding: var(--spacing-12) var(--spacing-24);
-  border-radius: var(--radius-buttons);
+  border-radius: var(--radius-button);
   font-family: var(--font-ui);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-body);
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: all 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 150ms ease;
+  letter-spacing: var(--tracking-normal);
 }
 
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-accent-text);
+  background-color: var(--color-green-text);
+  color: var(--color-canvas);
 }
 
 .btn-primary:hover {
-  background-color: #e0c45a;
+  background-color: var(--color-green-hover);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-subtle);
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: none;
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--color-chalk);
-  border: 1px solid var(--color-graphite);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .btn-outline:hover {
-  background-color: var(--color-chalk);
-  color: var(--color-abyss);
-  border-color: var(--color-chalk);
+  background-color: var(--color-surface);
+  border-color: var(--color-text);
+  color: var(--color-text);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   7. Cards (12px radius, hairline border, flat surface)
+   7. Cards (deep black surface, hairline border, green accent on hover)
    ───────────────────────────────────────────────────────────────────────── */
 .card {
-  background-color: var(--color-carbon);
-  border: 1px solid var(--color-graphite);
-  border-radius: var(--radius-cards);
-  padding: var(--card-padding);
-  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-24);
+  transition: border-color 150ms ease, transform 150ms ease;
 }
 
 .card:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-green);
+  transform: translateY(-2px);
 }
 
 .card h3 {
   font-size: var(--text-subheading);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-bold);
   margin-bottom: var(--spacing-12);
-  color: var(--color-chalk);
+  color: var(--color-text);
 }
 
 .card p {
-  color: var(--color-ash);
+  color: var(--color-text-muted);
   font-size: var(--text-body);
   margin-bottom: var(--spacing-16);
 }
@@ -408,23 +394,22 @@ b {
 
 .coming-soon h2 {
   font-size: var(--text-display);
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
-  font-weight: var(--weight-regular);
-  color: var(--color-accent);
+  font-weight: var(--weight-bold);
+  color: var(--color-green-text);
   margin-bottom: var(--spacing-24);
+  letter-spacing: var(--tracking-tight);
   opacity: 0;
   transform: scale(0.95);
-  animation: popIn 500ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+  animation: popIn 500ms ease forwards;
 }
 
 .coming-soon p {
-  font-size: var(--text-subheading);
-  color: var(--color-ash);
+  font-size: 18px;
+  color: var(--color-text-muted);
   max-width: 600px;
-  margin: 0 auto var(--spacing-40) auto;
+  margin: 0 auto var(--spacing-48) auto;
   opacity: 0;
-  animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) 200ms forwards;
+  animation: fadeUp 500ms ease 100ms forwards;
 }
 
 .date-badge {
@@ -432,15 +417,15 @@ b {
   align-items: center;
   gap: var(--spacing-12);
   padding: var(--spacing-16) var(--spacing-32);
-  background-color: var(--color-carbon);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-cards);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-green);
+  border-radius: var(--radius-card);
   font-family: var(--font-mono);
-  font-size: 18px;
-  color: var(--color-accent);
+  font-size: 16px;
+  color: var(--color-green-text);
   opacity: 0;
-  transform: translateY(12px);
-  animation: fadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
+  transform: translateY(16px);
+  animation: fadeUp 500ms ease 200ms forwards;
 }
 
 @keyframes popIn {
@@ -467,10 +452,10 @@ b {
 .form-group label {
   display: block;
   margin-bottom: var(--spacing-8);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: var(--weight-medium);
-  color: var(--color-ash);
-  letter-spacing: var(--tracking-caption);
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
   font-family: var(--font-ui);
 }
 
@@ -478,21 +463,20 @@ b {
 .form-group textarea {
   width: 100%;
   padding: var(--spacing-12) var(--spacing-16);
-  background-color: var(--color-carbon);
-  border: 1px solid var(--color-graphite);
-  border-radius: var(--radius-cards);
-  color: var(--color-chalk);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  color: var(--color-text);
   font-family: var(--font-ui);
-  font-size: 16px;
-  letter-spacing: var(--tracking-body);
-  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  font-size: 14px;
+  letter-spacing: var(--tracking-normal);
+  transition: border-color 150ms ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+  border-color: var(--color-green);
 }
 
 .form-group textarea {
@@ -501,13 +485,13 @@ b {
 }
 
 .contact-info h3 {
-  color: var(--color-accent);
+  color: var(--color-green-text);
   margin-bottom: var(--spacing-16);
   font-size: var(--text-subheading);
 }
 
 .contact-info p {
-  color: var(--color-ash);
+  color: var(--color-text-muted);
   margin-bottom: var(--spacing-12);
   font-size: var(--text-body);
 }
@@ -516,12 +500,12 @@ b {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background-color: var(--color-carbon);
-  border-radius: var(--radius-cards);
+  width: 30px;
+  height: 30px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
   margin-right: var(--spacing-12);
-  color: var(--color-accent);
+  color: var(--color-green-text);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -530,11 +514,11 @@ b {
 footer {
   margin-top: auto;
   padding: var(--spacing-40) 0;
-  border-top: 1px solid var(--color-graphite);
+  border-top: 1px solid var(--color-border);
   text-align: center;
-  font-size: 14px;
-  color: var(--color-ash);
-  letter-spacing: var(--tracking-caption);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
 }
 
 .footer-content {
@@ -545,15 +529,14 @@ footer {
 }
 
 .footer-content a {
-  color: var(--color-accent);
+  color: var(--color-green-text);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  letter-spacing: var(--tracking-body);
 }
 
 .footer-content a:hover {
-  color: var(--color-chalk);
+  color: var(--color-text);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -563,19 +546,19 @@ footer {
   .nav-links {
     display: none;
     position: absolute;
-    top: 64px;
+    top: 60px;
     left: 0;
     right: 0;
-    background-color: var(--color-carbon);
+    background-color: var(--color-surface);
     flex-direction: column;
     padding: var(--spacing-32);
-    gap: var(--spacing-20);
-    border-bottom: 1px solid var(--color-graphite);
+    gap: var(--spacing-24);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .nav-links.open {
     display: flex;
-    animation: slideDown 300ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: slideDown 300ms ease forwards;
   }
 
   @keyframes slideDown {
@@ -598,8 +581,8 @@ footer {
   }
 
   .hero {
-    min-height: 60dvh;
-    padding: var(--spacing-48) var(--spacing-24);
+    min-height: 65dvh;
+    padding: var(--spacing-64) var(--spacing-24);
   }
 
   .hero h1 {
@@ -617,15 +600,15 @@ footer {
 
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .coming-soon h2 {
-    font-size: 48px;
+    font-size: 40px;
   }
 
   .date-badge {
-    font-size: 16px;
+    font-size: 14px;
     padding: var(--spacing-12) var(--spacing-24);
     flex-direction: column;
     gap: var(--spacing-8);
