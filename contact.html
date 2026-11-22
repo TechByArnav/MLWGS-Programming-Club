@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | MLWGS Programming Club</title>
+  <meta name="description" content="Get in touch with the MLWGS Programming Club — questions about DragonsHack, workshops, or joining the club." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/logo.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav-wrapper">
+      <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
+        <img src="assets/logo.svg" alt="MLWGS dragon logo" />
+        <span class="logo-text">MLWGS<span style="color:var(--brand-accent); -webkit-text-fill-color: initial;">Programming</span> Club</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" role="navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="dragonshack.html">DragonsHack</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="min-height: 50dvh;">
+      <div class="hero-content">
+        <h1>Contact Us</h1>
+        <p>Have questions? Reach out — we'd love to hear from you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <form class="contact-form" novalidate>
+            <h2 style="margin-top: 0; margin-bottom: var(--space-6);">Send a Message</h2>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@school.edu" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's this about?" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+
+          <div class="contact-info">
+            <h2>Other Ways to Reach Us</h2>
+            <div style="margin-bottom: var(--space-5);">
+              <span class="icon" aria-hidden="true">✉</span>
+              <p><strong>Email:</strong> programming@mlwgs.com</p>
+            </div>
+            <div style="margin-bottom: var(--space-5);">
+              <span class="icon" aria-hidden="true">🏫</span>
+              <p><strong>Where:</strong> Room 214, Maggie L. Walker Governor's School<br>Richmond, Virginia</p>
+            </div>
+            <div style="margin-bottom: var(--space-5);">
+              <span class="icon" aria-hidden="true">⏰</span>
+              <p><strong>Meetings:</strong> Thursdays after school</p>
+            </div>
+            <p style="margin-top: var(--space-6); font-size: 0.9rem; color: #888;">
+              Students: see your club officer or email us to get added to the Discord.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>Made By <strong>Arnav</strong> &bull; <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">github.com/TechByArnav</a></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

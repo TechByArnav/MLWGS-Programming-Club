@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | MLWGS Programming Club</title>
+  <meta name="description" content="Learn about the MLWGS Programming Club — our mission, pillars, and the students who run it." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" href="assets/logo.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav-wrapper">
+      <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
+        <img src="assets/logo.svg" alt="MLWGS dragon logo" />
+        <span class="logo-text">MLWGS<span style="color:var(--brand-accent); -webkit-text-fill-color: initial;">Programming</span> Club</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" role="navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="dragonshack.html">DragonsHack</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" style="min-height: 60dvh;">
+      <div class="hero-content">
+        <h1>About Us</h1>
+        <p>Who we are, what we believe, and why we code.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Our Mission</h2>
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto var(--space-8) auto; text-align: center; color: #b8b8b8;">
+          The MLWGS Programming Club brings together students passionate about computer science to learn, build, and compete — together.
+        </p>
+
+        <h2 style="margin-top: var(--space-12);">The Walker Way</h2>
+        <p style="margin-bottom: var(--space-6);">We operate on the four pillars of Maggie L. Walker Governor's School:</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-6); margin-bottom: var(--space-12);">
+          <article class="card">
+            <h3>Courage</h3>
+            <p>Tackling hard problems, shipping imperfect code, and learning from every bug.</p>
+          </article>
+          <article class="card">
+            <h3>Compassion</h3>
+            <p>Helping teammates debug, mentoring newcomers, and building inclusive tech.</p>
+          </article>
+          <article class="card">
+            <h3>Community</h3>
+            <p>One room, one whiteboard, one repo — we grow stronger together.</p>
+          </article>
+          <article class="card">
+            <h3>Collaboration</h3>
+            <p>Pair programming, code reviews, and group projects that ship.</p>
+          </article>
+        </div>
+
+        <h2>Who Runs the Club</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6);">
+          <article class="card">
+            <h3>Arnav</h3>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--brand-accent); margin-bottom: var(--space-3);">Founder &amp; Web Lead</p>
+            <p>Built this site, leads the web track, and organizes DragonsHack logistics.</p>
+          </article>
+          <article class="card">
+            <h3>Club Officers</h3>
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--brand-accent); margin-bottom: var(--space-3);">Student Leadership</p>
+            <p>Plan workshops, run competitions, and keep the community thriving.</p>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--space-12);">
+          <a href="contact.html" class="btn btn-outline">Get in Touch →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>Made By <strong>Arnav</strong> &bull; <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">github.com/TechByArnav</a></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
