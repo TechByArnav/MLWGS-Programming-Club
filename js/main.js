@@ -463,6 +463,214 @@ function initBackToTop() {
   });
 }
 
+// ── Color Shift on Scroll ──
+function initColorShift() {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollY / docHeight : 0;
+        // Shift hue from 120 (green) to 160 (cyan-green) and back
+        const hue = 120 + Math.sin(progress * Math.PI * 2) * 20;
+        document.documentElement.style.setProperty('--green', `hsl(${hue}, 100%, 45%)`);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// ── Ripple Effect on Buttons ──
+function initRippleEffect() {
+  document.querySelectorAll('.btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+      ripple.style.marginLeft = -(Math.max(rect.width, rect.height) / 2) + 'px';
+      ripple.style.marginTop = -(Math.max(rect.width, rect.height) / 2) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+// ── Tilt Effect on Cards ──
+function initTiltEffect() {
+  const cards = document.querySelectorAll('.card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      card.style.transition = 'transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+      setTimeout(() => { card.style.transition = ''; }, 400);
+    });
+  });
+}
+
+// ── Stats Counter Animation ──
+function initStatsCounter() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  if (!statNumbers.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        const duration = 2000;
+        const start = performance.now();
+        
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach((el) => observer.observe(el));
+}
+
+// ── Accordion FAQ ──
+function initAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) return;
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector('.faq-question');
+    if (!question) return;
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all others
+      faqItems.forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+}
+
+// ── Loading Screen ──
+function initLoadingScreen() {
+  const screen = document.querySelector('.loading-screen');
+  if (!screen) return;
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      screen.classList.add('hidden');
+      setTimeout(() => screen.remove(), 500);
+    }, 800);
+  });
+}
+
+// ── Sticky CTA Bar ──
+function initStickyCTA() {
+  const bar = document.querySelector('.sticky-cta');
+  if (!bar) return;
+
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  window.addEventListener('scroll', () => {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      bar.classList.add('visible');
+    } else {
+      bar.classList.remove('visible');
+    }
+  }, { passive: true });
+}
+
+// ── Prefetching on hover ──
+function initPrefetch() {
+  const links = document.querySelectorAll('a[href$=".html"]');
+  const prefetched = new Set();
+
+  links.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      const href = link.getAttribute('href');
+      if (href && !prefetched.has(href) && !href.startsWith('http')) {
+        const prefetchLink = document.createElement('link');
+        prefetchLink.rel = 'prefetch';
+        prefetchLink.href = href;
+        document.head.appendChild(prefetchLink);
+        prefetched.add(href);
+      }
+    });
+  });
+}
+
+// ── Color Shift on Scroll ──
+function initColorShift() {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollY / docHeight : 0;
+        const hue = 120 + Math.sin(progress * Math.PI * 2) * 15;
+        document.documentElement.style.setProperty('--green', `hsl(${hue}, 100%, 45%)`);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// ── View Transitions (if supported) ──
+function initViewTransitions() {
+  if (!document.startViewTransition) return;
+
+  document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http')) return;
+      e.preventDefault();
+      document.startViewTransition(() => {
+        window.location.href = href;
+      });
+    });
+  });
+}
+
+// Add new init calls
+document.addEventListener('DOMContentLoaded', () => {
+  initRippleEffect();
+  initTiltEffect();
+  initStatsCounter();
+  initAccordion();
+  initLoadingScreen();
+  initStickyCTA();
+  initPrefetch();
+  initColorShift();
+  initViewTransitions();
+  initCopyEmail();
+});
+
 // ── Spotlight Cursor Effect ──
 function initSpotlight() {
   const spotlight = document.getElementById('spotlight');
