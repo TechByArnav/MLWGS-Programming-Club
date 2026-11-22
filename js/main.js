@@ -1,17 +1,17 @@
 /* ==========================================================================
-   MLWGS Programming Club — Interactions & Motion
-   Skills applied: bencho-micro-interactions, impeccable, unslop
+   MLWGS Programming Club — Motion & Interactions
+   Polished minimalist: scroll reveals, springy hover, smooth scroll.
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initSmoothScroll();
   initActiveNav();
+  initScrollReveals();
   initFormEnhancements();
-  initEntranceAnimation();
 });
 
-// ── Mobile navigation (spring-like toggle via CSS) ──
+// ── Mobile navigation ──
 function initMobileNav() {
   const toggle = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
@@ -23,7 +23,6 @@ function initMobileNav() {
     toggle.setAttribute('aria-expanded', isOpen);
   });
 
-  // Close menu when clicking a link
   navLinks.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('open');
@@ -31,7 +30,6 @@ function initMobileNav() {
     });
   });
 
-  // Close on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       navLinks.classList.remove('open');
@@ -53,7 +51,7 @@ function initSmoothScroll() {
   });
 }
 
-// ── Highlight active nav link based on current page ──
+// ── Highlight active nav link ──
 function initActiveNav() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const pages = {
@@ -62,7 +60,6 @@ function initActiveNav() {
     'dragonshack.html': 'dragonshack',
     'contact.html': 'contact',
   };
-
   const currentKey = pages[currentPath] || 'index';
   document.querySelectorAll('.nav-links a').forEach((link) => {
     const href = link.getAttribute('href');
@@ -72,7 +69,26 @@ function initActiveNav() {
   });
 }
 
-// ── Contact form enhancements ──
+// ── Scroll reveal animations ──
+function initScrollReveals() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  );
+
+  document.querySelectorAll('.reveal').forEach((el) => {
+    observer.observe(el);
+  });
+}
+
+// ── Contact form enhancement ──
 function initFormEnhancements() {
   const form = document.querySelector('.contact-form');
   if (!form) return;
@@ -80,40 +96,23 @@ function initFormEnhancements() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    const originalText = btn.textContent;
+    const original = btn.textContent;
 
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    // Simulate send with spring-timed feedback
     setTimeout(() => {
       btn.textContent = 'Sent!';
-      btn.style.backgroundColor = 'var(--brand-success)';
-      btn.style.color = '#ffffff';
+      btn.style.background = '#00ff41';
+      btn.style.color = '#000';
 
       setTimeout(() => {
-        btn.textContent = originalText;
+        btn.textContent = original;
         btn.disabled = false;
-        btn.style.backgroundColor = '';
+        btn.style.background = '';
         btn.style.color = '';
         form.reset();
-      }, 1500);
-    }, 800);
-  });
-}
-
-// ── Entrance animation for page content ──
-function initEntranceAnimation() {
-  const main = document.querySelector('main');
-  if (!main) return;
-
-  // Subtle fade-in for the main content on load
-  main.style.opacity = '0';
-  main.style.transform = 'translateY(8px)';
-  main.style.transition = 'opacity 500ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1)';
-
-  requestAnimationFrame(() => {
-    main.style.opacity = '1';
-    main.style.transform = 'translateY(0)';
+      }, 1200);
+    }, 700);
   });
 }

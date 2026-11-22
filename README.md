@@ -15,50 +15,44 @@ Official website for the Maggie L. Walker Governor's School Programming Club.
 
 | Role | Value | Token |
 |------|-------|-------|
-| Canvas (full black) | `#000000` | `--color-canvas` |
-| Card surface | `#0a0a0a` | `--color-surface` |
-| Elevated surface | `#111111` | `--color-surface-elevated` |
-| Hairline borders | `#1a1a1a` | `--color-border` |
-| Primary text | `#e8e8e8` | `--color-text` |
-| Muted text | `#8a8a8a` | `--color-text-muted` |
-| Deep forest green | `#004d00` | `--color-green` |
-| Green hover | `#006600` | `--color-green-hover` |
-| Green text on black | `#00ff00` | `--color-green-text` |
+| Canvas (full black) | `#000000` | `--canvas` |
+| Card surface | `#0a0a0a` | `--surface` |
+| Elevated surface | `#111111` | `--surface-elev` |
+| Hairline borders | `#141414` | `--border` |
+| Primary text | `#e8e8e8` | `--text` |
+| Muted text | `#6b6b6b` | `--text-muted` |
+| Deep green | `#004d00` | `--green-dim` |
+| Bright matrix green | `#00ff41` | `--green` |
+| Green hover | `#33ff66` | `--green-hover` |
 
 ## Logo
 
 - `assets/logo.png` — MLWGS dragon logo (your attached PNG)
 - `assets/logo.svg` — vector fallback
 
-## Nav Bar (fixed)
+## Nav Bar (fixed — horizontal row)
 
-- Logo on the left: green dragon icon + "MLWGS Programming Club" ("Programming" in bright green)
+- Logo on the left: green dragon icon + "MLWGS Programming Club"
 - Nav links on the right in a horizontal row: Home, About Us, DragonsHack, Contact
 - Active link shows a bright green underline
 - Sticky header with hairline bottom border
 - Mobile: hamburger menu toggles a vertical link list
 
+## Motion
+
+- Hero entrance animation (fade up with spring easing)
+- Scroll-reveal on all cards and sections (IntersectionObserver)
+- Springy hover transitions on buttons and cards
+- Smooth scroll for anchor links
+- Respects `prefers-reduced-motion`
+
 ## Deploy to GitHub Pages
 
 1. Create a new repository on GitHub (e.g., `mlwgs-programming-club`).
-2. Push this folder's contents to the `main` branch.
+2. Push this folder's contents to the `main` branch via GitHub Desktop.
 3. Go to **Settings → Pages**.
 4. Set source to **Deploy from a branch** → `main` / `(root)`.
 5. Your site will be live at `https://<your-username>.github.io/mlwgs-programming-club/`.
-
-## Skills Used
-
-1. **brand-identity** — MLWGS color tokens, typography, logo clear-space, voice/tone
-2. **accent-color-hierarchy** — Black canvas 60%, deep green 30%, bright green 10% (replaces yellow)
-3. **typography-curation** — Switzer/TWK Lausanne + Commit Mono (no AI cliché fonts)
-4. **landing-page-design** — Page structure, conversion copy, SEO/AEO meta
-5. **impeccable** — Design-direction layer: init → shape → new-work → polish → audit
-6. **niche-design-hacks** — Nested radii, alpha borders, dark-mode elevation, `100dvh`
-7. **bencho-micro-interactions** — Spring-timed hover/focus/entry motion, weighted deceleration
-8. **unslop** — Final audit pass: no glows, gradient text, emoji labels, or uneven spacing
-9. **superpowers-workflow** — RED-GREEN-REFACTOR planning, test-driven verification
-
-*Skipped: `remotion-bootstrap` (no video required).*
 
 ## Footer
 

@@ -11,10 +11,10 @@
 </head>
 <body>
   <header class="header">
-    <div class="nav-wrapper">
+    <div class="nav-wrap">
       <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
         <img src="assets/logo.png" alt="MLWGS dragon logo" />
-        <span class="brand-name">MLWGS<span class="green">Programming</span> Club</span>
+        <span class="name">MLWGS<span class="green">Programming</span> Club</span>
       </a>
       <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -31,7 +31,7 @@
   </header>
 
   <main>
-    <section class="hero" style="min-height: 40dvh;">
+    <section class="hero" style="min-height: 35dvh;">
       <div class="hero-content">
         <h1>Contact Us</h1>
         <p>Have questions? Reach out &mdash; we&rsquo;d love to hear from you.</p>
@@ -41,8 +41,8 @@
     <section class="section">
       <div class="container">
         <div class="contact-grid">
-          <form class="contact-form" novalidate>
-            <h2 style="margin-top: 0; margin-bottom: var(--spacing-24); font-size: var(--text-heading-sm);">Send a Message</h2>
+          <form class="contact-form" novalidate class="reveal">
+            <h2 style="margin-top: 0; margin-bottom: var(--s-24); font-size: var(--t-sm);">Send a Message</h2>
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" placeholder="Your name" required />
@@ -62,21 +62,21 @@
             <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
 
-          <div class="contact-info">
+          <div class="contact-info reveal">
             <h3>Other Ways to Reach Us</h3>
-            <div style="margin-bottom: var(--spacing-24);">
+            <div style="margin-bottom: var(--s-24);">
               <span class="icon" aria-hidden="true">&#9993;</span>
               <p><strong>Email:</strong> programming@mlwgs.com</p>
             </div>
-            <div style="margin-bottom: var(--spacing-24);">
+            <div style="margin-bottom: var(--s-24);">
               <span class="icon" aria-hidden="true">&#127969;</span>
               <p><strong>Where:</strong> Room 214, Maggie L. Walker Governor&rsquo;s School<br>Richmond, Virginia</p>
             </div>
-            <div style="margin-bottom: var(--spacing-24);">
+            <div style="margin-bottom: var(--s-24);">
               <span class="icon" aria-hidden="true">&#8987;</span>
               <p><strong>Meetings:</strong> Thursdays after school</p>
             </div>
-            <p style="font-size: 12px; color: var(--color-text-muted); margin-top: var(--spacing-24);">
+            <p style="font-size: var(--t-c); color: var(--text-dim); margin-top: var(--s-24);">
               Students: see your club officer or email us to get added to the Discord.
             </p>
           </div>

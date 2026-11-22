@@ -11,10 +11,10 @@
 </head>
 <body>
   <header class="header">
-    <div class="nav-wrapper">
+    <div class="nav-wrap">
       <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
         <img src="assets/logo.png" alt="MLWGS dragon logo" />
-        <span class="brand-name">MLWGS<span class="green">Programming</span> Club</span>
+        <span class="name">MLWGS<span class="green">Programming</span> Club</span>
       </a>
       <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -33,31 +33,33 @@
   <main>
     <section class="hero">
       <div class="hero-content">
-        <h1>Code. Build. Compete.</h1>
+        <h1>Code.<br>Build.<br>Compete.</h1>
         <p>The programming club of Maggie L. Walker Governor&rsquo;s School. A community for developers, problem-solvers, and creators building the future.</p>
-        <a href="dragonshack.html" class="btn btn-primary">Join DragonsHack &rarr;</a>
-        <a href="about.html" class="btn btn-outline" style="margin-left: var(--spacing-16);">Learn More &rarr;</a>
+        <div class="hero-actions">
+          <a href="dragonshack.html" class="btn btn-primary">Join DragonsHack &rarr;</a>
+          <a href="about.html" class="btn btn-outline">Learn More &rarr;</a>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2>What We Do</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-24); margin-top: var(--spacing-32);">
-          <article class="card">
+        <h2 class="reveal">What We Do</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-24); margin-top: var(--s-40);">
+          <article class="card reveal">
             <h3>Weekly Workshops</h3>
             <p>Hands-on sessions covering Python, JavaScript, web development, algorithms, and more. All experience levels welcome.</p>
-            <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-green-text); margin: 0;">Every Thursday &bull; Room 214</p>
+            <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin: var(--s-16) 0 0 0;">Every Thursday &bull; Room 214</p>
           </article>
-          <article class="card">
+          <article class="card reveal">
             <h3>DragonsHack</h3>
             <p>Our annual high-school hackathon. Late January &ndash; Early February. Build, ship, and compete.</p>
-            <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-green-text); margin: 0;">Coming Soon &bull; mlwgsdragonshack.dev</p>
+            <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin: var(--s-16) 0 0 0;">Coming Soon &bull; mlwgsdragonshack.dev</p>
           </article>
-          <article class="card">
+          <article class="card reveal">
             <h3>Competitive Programming</h3>
             <p>USACO, Codeforces, and local contests. Train with a team that loves solving hard problems under pressure.</p>
-            <p style="font-family: var(--font-mono); font-size: 12px; color: var(--color-green-text); margin: 0;">Weekly practice &bull; All grades</p>
+            <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin: var(--s-16) 0 0 0;">Weekly practice &bull; All grades</p>
           </article>
         </div>
       </div>
