@@ -21,7 +21,7 @@
 
   <link rel="icon" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
 
   <script type="application/ld+json">
   {
@@ -114,6 +114,22 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <div class="spotlight" id="spotlight"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <div class="command-palette" id="commandPalette">
+    <div class="command-palette-backdrop" id="commandPaletteBackdrop"></div>
+    <div class="command-palette-content">
+      <input type="text" class="command-palette-input" id="commandPaletteInput" placeholder="Search pages, links, actions..." />
+      <div class="command-palette-results" id="commandPaletteResults"></div>
+      <div class="command-palette-hint">
+        <span><kbd>↑↓</kbd> Navigate</span>
+        <span><kbd>Enter</kbd> Select</span>
+        <span><kbd>Esc</kbd> Close</span>
+      </div>
+    </div>
+  </div>
   <script src="js/main.js"></script>
 </body>
 </html>

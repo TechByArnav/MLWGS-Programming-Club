@@ -164,9 +164,11 @@ function initParallax() {
         const scrollY = window.scrollY;
         const heroHeight = hero.offsetHeight;
         if (scrollY < heroHeight) {
-          heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
-          if (heroGlow) heroGlow.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.15}px)) scale(${1 + (scrollY / heroHeight) * 0.1})`;
-          if (heroParticles) heroParticles.style.transform = `translateY(${scrollY * 0.2}px)`;
+          // Only move background elements, not the content/buttons
+          if (heroGlow) heroGlow.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.1}px)) scale(${1 + (scrollY / heroHeight) * 0.05})`;
+          if (heroParticles) heroParticles.style.transform = `translateY(${scrollY * 0.1}px)`;
+          // Keep content in place to avoid clipping
+          heroContent.style.transform = 'translateY(0)';
         }
         ticking = false;
       });
@@ -458,5 +460,199 @@ function initBackToTop() {
 
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ── Spotlight Cursor Effect ──
+function initSpotlight() {
+  const spotlight = document.getElementById('spotlight');
+  if (!spotlight) return;
+
+  // Only on desktop
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    spotlight.style.display = 'none';
+    return;
+  }
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let spotlightX = 0;
+  let spotlightY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    spotlight.classList.add('active');
+  });
+
+  document.addEventListener('mouseleave', () => {
+    spotlight.classList.remove('active');
+  });
+
+  function updateSpotlight() {
+    spotlightX += (mouseX - spotlightX) * 0.1;
+    spotlightY += (mouseY - spotlightY) * 0.1;
+    spotlight.style.left = spotlightX + 'px';
+    spotlight.style.top = spotlightY + 'px';
+    requestAnimationFrame(updateSpotlight);
+  }
+  updateSpotlight();
+}
+
+// ── Cursor Trail ──
+function initCursorTrail() {
+  const trail = document.getElementById('cursorTrail');
+  if (!trail) return;
+
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    trail.style.display = 'none';
+    return;
+  }
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let trailX = 0;
+  let trailY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    trail.classList.add('active');
+  });
+
+  document.addEventListener('mouseleave', () => {
+    trail.classList.remove('active');
+  });
+
+  function updateTrail() {
+    trailX += (mouseX - trailX) * 0.15;
+    trailY += (mouseY - trailY) * 0.15;
+    trail.style.left = (trailX - 3) + 'px';
+    trail.style.top = (trailY - 3) + 'px';
+    requestAnimationFrame(updateTrail);
+  }
+  updateTrail();
+}
+
+// ── Command Palette (press /) ──
+function initCommandPalette() {
+  const palette = document.getElementById('commandPalette');
+  const backdrop = document.getElementById('commandPaletteBackdrop');
+  const input = document.getElementById('commandPaletteInput');
+  const results = document.getElementById('commandPaletteResults');
+  if (!palette || !input || !results) return;
+
+  const pages = [
+    { name: 'Home', url: 'index.html', icon: '🏠', desc: 'MLWGS Programming Club landing page' },
+    { name: 'About Us', url: 'about.html', icon: '📖', desc: 'Mission, pillars, and leadership' },
+    { name: 'DragonsHack', url: 'dragonshack.html', icon: '🐉', desc: 'Annual hackathon — coming soon' },
+    { name: 'Contact', url: 'contact.html', icon: '✉', desc: 'Get in touch with the club' },
+    { name: 'GitHub', url: 'https://github.com/TechByArnav', icon: '⭐', desc: 'Arnav\'s GitHub profile', external: true },
+    { name: 'Email', url: 'mailto:arnav.shukla2607@gmail.com', icon: '📧', desc: 'Send an email', external: true },
+  ];
+
+  let selectedIndex = 0;
+  let filteredPages = [...pages];
+
+  function renderResults() {
+    results.innerHTML = '';
+    filteredPages.forEach((page, i) => {
+      const item = document.createElement('div');
+      item.className = 'command-palette-item' + (i === selectedIndex ? ' selected' : '');
+      item.innerHTML = `<span class="icon">${page.icon}</span><div><div>${page.name}</div><div style="font-size:11px;color:var(--text-dim)">${page.desc}</div></div>`;
+      item.addEventListener('click', () => navigateTo(page));
+      results.appendChild(item);
+    });
+  }
+
+  function navigateTo(page) {
+    closePalette();
+    if (page.external) {
+      window.open(page.url, '_blank');
+    } else {
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = page.url; }, 200);
+    }
+  }
+
+  function openPalette() {
+    palette.classList.add('open');
+    input.value = '';
+    filteredPages = [...pages];
+    selectedIndex = 0;
+    renderResults();
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function closePalette() {
+    palette.classList.remove('open');
+  }
+
+  // Keyboard shortcut: / to open
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      const tag = document.activeElement.tagName.toLowerCase();
+      if (tag !== 'input' && tag !== 'textarea') {
+        e.preventDefault();
+        openPalette();
+      }
+    }
+    if (e.key === 'Escape') {
+      closePalette();
+    }
+  });
+
+  // Backdrop click to close
+  if (backdrop) {
+    backdrop.addEventListener('click', closePalette);
+  }
+
+  // Filter on input
+  input.addEventListener('input', () => {
+    const query = input.value.toLowerCase();
+    filteredPages = pages.filter(p => 
+      p.name.toLowerCase().includes(query) || 
+      p.desc.toLowerCase().includes(query)
+    );
+    selectedIndex = 0;
+    renderResults();
+  });
+
+  // Keyboard navigation
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, filteredPages.length - 1);
+      renderResults();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+      renderResults();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (filteredPages[selectedIndex]) {
+        navigateTo(filteredPages[selectedIndex]);
+      }
+    }
+  });
+
+  // Initial render
+  renderResults();
+}
+
+// ── Copy Email Button ──
+function initCopyEmail() {
+  const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+  emailLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const email = link.getAttribute('href').replace('mailto:', '');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(() => {
+          const original = link.textContent;
+          link.textContent = 'Copied!';
+          setTimeout(() => { link.textContent = original; }, 1500);
+        }).catch(() => {});
+      }
+    });
   });
 }

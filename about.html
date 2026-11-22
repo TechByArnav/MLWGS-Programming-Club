@@ -21,7 +21,7 @@
 
   <link rel="icon" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
 
   <script type="application/ld+json">
   {
@@ -80,7 +80,7 @@
         <p class="reveal" style="margin-bottom: var(--s-24); font-size: 14px; color: var(--text-dim);">
           We operate on the four pillars of Maggie L. Walker Governor&rsquo;s School:
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-24); margin-bottom: var(--s-80);">
+        <div class="pillars-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-24); margin-bottom: var(--s-80);">
           <article class="card reveal" tabindex="0">
             <h3>Courage</h3>
             <p>Tackling hard problems, shipping imperfect code, and learning from every bug.</p>
@@ -133,6 +133,22 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+  <div class="spotlight" id="spotlight"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <div class="command-palette" id="commandPalette">
+    <div class="command-palette-backdrop" id="commandPaletteBackdrop"></div>
+    <div class="command-palette-content">
+      <input type="text" class="command-palette-input" id="commandPaletteInput" placeholder="Search pages, links, actions..." />
+      <div class="command-palette-results" id="commandPaletteResults"></div>
+      <div class="command-palette-hint">
+        <span><kbd>↑↓</kbd> Navigate</span>
+        <span><kbd>Enter</kbd> Select</span>
+        <span><kbd>Esc</kbd> Close</span>
+      </div>
+    </div>
+  </div>
   <script src="js/main.js"></script>
 </body>
 </html>
