@@ -595,9 +595,9 @@ body.light .card-glass {
    Dark Mode Color Temperature (warm black)
    ───────────────────────────────────────────────────────────────────────── */
 body:not(.light) {
-  --canvas: #0a0a08;
-  --surface: #0f0f0d;
-  --border: #1a1a18;
+  --canvas: #000000;
+  --surface: #0a0a0a;
+  --border: #141414;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
