@@ -1,9 +1,9 @@
 /* ==========================================================================
-   MLWGS Programming Club — Motion & Interactions
-   Features: text scramble, smooth page transitions, interactive particles,
-   parallax, scroll reveals, mobile nav, form feedback.
+   MLWGS Programming Club — Premium Design System
+   (CSS already written above, this is the JS update)
    ========================================================================== */
 
+// All previous init functions + new ones
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initSmoothScroll();
@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageTransitions();
   initInteractiveParticles();
   initMagneticButtons();
+  initThemeToggle();
+  initScrollProgress();
+  initBackToTop();
+  initMobileMenuClose();
 });
 
 // ── Mobile navigation ──
@@ -39,6 +43,20 @@ function initMobileNav() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      navLinks.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// ── Close mobile menu on outside click ──
+function initMobileMenuClose() {
+  const navLinks = document.querySelector('.nav-links');
+  const toggle = document.querySelector('.menu-toggle');
+  if (!navLinks || !toggle) return;
+
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !toggle.contains(e.target)) {
       navLinks.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
     }
@@ -101,6 +119,10 @@ function initFormEnhancements() {
   if (!form) return;
 
   form.addEventListener('submit', (e) => {
+    // If mailto, let it proceed
+    if (form.getAttribute('action') && form.getAttribute('action').startsWith('mailto:')) {
+      return; // Let the browser handle mailto
+    }
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     const original = btn.textContent;
@@ -110,7 +132,7 @@ function initFormEnhancements() {
 
     setTimeout(() => {
       btn.textContent = 'Sent!';
-      btn.style.background = '#00ff41';
+      btn.style.background = '#00e639';
       btn.style.color = '#000';
 
       setTimeout(() => {
@@ -172,16 +194,15 @@ function initParticleMotion() {
   }, { passive: true });
 }
 
-// ── 5. Text Scramble Effect on Hero Title ──
+// ── Text Scramble Effect on Hero Title ──
 function initTextScramble() {
   const heroTitle = document.querySelector('.hero h1');
   if (!heroTitle) return;
 
-  const originalText = heroTitle.innerHTML;
-  const lines = originalText.split('<br>');
+  const originalHTML = heroTitle.innerHTML;
+  const lines = originalHTML.split('<br>');
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~';
   
-  // Scramble each line
   const scrambledLines = lines.map((line) => {
     const text = line.replace(/<[^>]*>/g, '').trim();
     return text.split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
@@ -191,10 +212,9 @@ function initTextScramble() {
   heroTitle.style.opacity = '1';
   heroTitle.style.transform = 'translateY(0)';
 
-  // Reveal character by character
   let lineIndex = 0;
   let charIndex = 0;
-  const revealSpeed = 30; // ms per character
+  const revealSpeed = 30;
 
   function revealNext() {
     if (lineIndex >= lines.length) return;
@@ -218,23 +238,20 @@ function initTextScramble() {
     }
   }
 
-  // Start after a brief delay
   setTimeout(revealNext, 500);
 }
 
-// ── 6. Smooth Page Transitions ──
+// ── Smooth Page Transitions ──
 function initPageTransitions() {
-  // Fade in on page load
   document.body.style.opacity = '0';
   document.body.style.transition = 'opacity 400ms cubic-bezier(0.16, 1, 0.3, 1)';
   requestAnimationFrame(() => {
     document.body.style.opacity = '1';
   });
 
-  // Intercept internal link clicks for fade-out transition
   document.querySelectorAll('a[href]').forEach((link) => {
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) return;
 
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -246,24 +263,23 @@ function initPageTransitions() {
   });
 }
 
-// ── 7. Interactive Particle Field (repulsion from cursor) ──
+// ── Interactive Particle Field (repulsion from cursor) ──
 function initInteractiveParticles() {
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
-  // Create canvas
   const canvas = document.createElement('canvas');
   canvas.className = 'hero-particle-canvas';
-  canvas.style.position = 'absolute';
-  canvas.style.inset = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '0';
   hero.insertBefore(canvas, hero.firstChild);
 
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
+
+  // Check reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
 
   let width, height, dpr;
   let particles = [];
@@ -311,7 +327,6 @@ function initInteractiveParticles() {
         p.vy += (dy / dist) * force * 1.8;
       }
 
-      // Spring back to origin
       p.vx += (p.originX - p.x) * 0.03;
       p.vy += (p.originY - p.y) * 0.03;
       p.vx *= 0.88;
@@ -320,17 +335,15 @@ function initInteractiveParticles() {
       p.x += p.vx;
       p.y += p.vy;
 
-      // Draw
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0, 255, 65, ${p.alpha})`;
+      ctx.fillStyle = `rgba(0, 230, 57, ${p.alpha})`;
       ctx.fill();
     }
 
     requestAnimationFrame(update);
   }
 
-  // Mouse tracking
   hero.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
     mouse.x = e.clientX - rect.left;
@@ -342,7 +355,6 @@ function initInteractiveParticles() {
     mouse.y = -9999;
   });
 
-  // Init
   resize();
   createParticles();
   update();
@@ -358,8 +370,8 @@ function initMagneticButtons() {
   const buttons = document.querySelectorAll('.btn');
   if (!buttons.length) return;
 
-  const strength = 0.3; // How much the button moves toward cursor
-  const radius = 100;   // Activation radius in pixels
+  const strength = 0.3;
+  const radius = 100;
 
   buttons.forEach((btn) => {
     let isHovering = false;
@@ -370,7 +382,6 @@ function initMagneticButtons() {
 
     btn.addEventListener('mouseleave', () => {
       isHovering = false;
-      // Spring back to original position
       btn.style.transition = 'transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)';
       btn.style.transform = 'translate(0, 0)';
       setTimeout(() => {
@@ -396,5 +407,56 @@ function initMagneticButtons() {
         btn.style.transform = `translate(${pullX}px, ${pullY}px)`;
       }
     });
+  });
+}
+
+// ── Theme Toggle (Dark/Light) ──
+function initThemeToggle() {
+  const toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+
+  // Check saved preference
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light');
+    toggle.textContent = '🌙';
+  }
+
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    toggle.textContent = isLight ? '🌙' : '☀';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+}
+
+// ── Scroll Progress Bar ──
+function initScrollProgress() {
+  const progressBar = document.getElementById('scrollProgress');
+  if (!progressBar) return;
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }, { passive: true });
+}
+
+// ── Back to Top Button ──
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }

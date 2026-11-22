@@ -4,21 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MLWGS Programming Club | Code. Build. Compete.</title>
-  <meta name="description" content="The official programming club of Maggie L. Walker Governor's School. Learn, build, and compete at DragonsHack." />
+  <meta name="description" content="The official programming club of Maggie L. Walker Governor's School. Learn, build, and compete at DragonsHack — our annual hackathon." />
   <meta name="theme-color" content="#000000" />
+  <meta name="author" content="Arnav Shukla" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MLWGS Programming Club | Code. Build. Compete." />
+  <meta property="og:description" content="The official programming club of Maggie L. Walker Governor's School. Learn, build, and compete at DragonsHack." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://techbyarnav.github.io/mlwgs-programming-club/" />
+  <meta property="og:image" content="https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="MLWGS Programming Club | Code. Build. Compete." />
+  <meta name="twitter:description" content="The official programming club of Maggie L. Walker Governor's School." />
+  <meta name="twitter:image" content="https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png" />
+
+  <!-- Favicon -->
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=9" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MLWGS Programming Club",
+    "description": "The official programming club of Maggie L. Walker Governor's School",
+    "url": "https://techbyarnav.github.io/mlwgs-programming-club/",
+    "logo": "https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png",
+    "sameAs": ["https://github.com/TechByArnav"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "arnav.shukla2607@gmail.com",
+      "contactType": "general"
+    }
+  }
+  </script>
 </head>
 <body>
+  <!-- Skip to Content -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <header class="header">
     <div class="nav-wrap">
       <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
-        <img src="assets/logo.png" alt="MLWGS dragon logo" />
+        <img src="assets/logo.png" alt="MLWGS dragon logo" loading="lazy" />
         <span class="name">MLWGS<span class="green">Programming</span> Club</span>
       </a>
-      <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: var(--s-12);">
+        <button class="theme-toggle" aria-label="Toggle light/dark mode" id="themeToggle">☀</button>
+        <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
       <nav class="nav-links-wrapper">
         <ul class="nav-links">
           <li><a href="index.html" class="active">Home</a></li>
@@ -30,7 +80,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero">
       <div class="hero-bg">
         <div class="hero-grid"></div>
@@ -48,23 +98,27 @@
           <a href="about.html" class="btn btn-outline">Learn More &rarr;</a>
         </div>
       </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="arrow"></div>
+      </div>
     </section>
 
     <section class="section">
       <div class="container">
         <h2 class="reveal" style="margin-bottom: var(--s-40);">What We Do</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-24);">
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Weekly Workshops</h3>
             <p>Hands-on sessions covering Python, JavaScript, web development, algorithms, and more. All experience levels welcome.</p>
             <p class="meta">Every Thursday &bull; Room 214</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>DragonsHack</h3>
             <p>Our annual high-school hackathon. Late January &ndash; Early February. Build, ship, and compete.</p>
             <p class="meta">Coming Soon &bull; mlwgsdragonshack.dev</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Competitive Programming</h3>
             <p>USACO, Codeforces, and local contests. Train with a team that loves solving hard problems under pressure.</p>
             <p class="meta">Weekly practice &bull; All grades</p>
@@ -76,9 +130,18 @@
 
   <footer>
     <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:arnav.shukla2607@gmail.com">Email</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
       <p>Made By <strong>Arnav</strong> &bull; <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">github.com/TechByArnav</a></p>
     </div>
   </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
 
   <script src="js/main.js"></script>
 </body>

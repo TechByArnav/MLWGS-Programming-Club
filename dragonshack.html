@@ -6,19 +6,53 @@
   <title>DragonsHack | MLWGS Programming Club</title>
   <meta name="description" content="DragonsHack is the annual MLWGS Programming Club hackathon &mdash; coming soon in late January &ndash; early February. Build, ship, compete." />
   <meta name="theme-color" content="#000000" />
+  <meta name="author" content="Arnav Shukla" />
+
+  <meta property="og:title" content="DragonsHack | MLWGS Programming Club" />
+  <meta property="og:description" content="DragonsHack is the annual MLWGS Programming Club hackathon — coming soon in late January – early February." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://techbyarnav.github.io/mlwgs-programming-club/dragonshack.html" />
+  <meta property="og:image" content="https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="DragonsHack | MLWGS Programming Club" />
+  <meta name="twitter:description" content="DragonsHack — annual MLWGS hackathon. Coming soon: late Jan – early Feb." />
+  <meta name="twitter:image" content="https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png" />
+
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "DragonsHack",
+    "description": "MLWGS Programming Club annual hackathon",
+    "organizer": {
+      "@type": "Organization",
+      "name": "MLWGS Programming Club"
+    },
+    "eventStatus": "https://schema.org/EventScheduled"
+  }
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <header class="header">
     <div class="nav-wrap">
       <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
-        <img src="assets/logo.png" alt="MLWGS dragon logo" />
+        <img src="assets/logo.png" alt="MLWGS dragon logo" loading="lazy" />
         <span class="name">MLWGS<span class="green">Programming</span> Club</span>
       </a>
-      <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: var(--s-12);">
+        <button class="theme-toggle" aria-label="Toggle light/dark mode" id="themeToggle">☀</button>
+        <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
       <nav class="nav-links-wrapper">
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
@@ -30,7 +64,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="coming-soon">
       <div class="container">
         <h2 class="reveal">DragonsHack</h2>
@@ -46,15 +80,15 @@
       <div class="container">
         <h2 class="reveal" style="margin-bottom: var(--s-40);">What to Expect</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-24); margin-bottom: var(--s-80);">
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Build</h3>
             <p>Form a team, pick a problem, and ship a working prototype in 24 hours.</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Learn</h3>
             <p>Workshops and mentors available throughout the event for all skill levels.</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Compete</h3>
             <p>Demo your project to judges. Prizes for best overall, best design, and best beginner hack.</p>
           </article>
@@ -69,10 +103,17 @@
 
   <footer>
     <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:arnav.shukla2607@gmail.com">Email</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
       <p>Made By <strong>Arnav</strong> &bull; <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">github.com/TechByArnav</a></p>
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
   <script src="js/main.js"></script>
 </body>
 </html>

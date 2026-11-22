@@ -6,19 +6,50 @@
   <title>About Us | MLWGS Programming Club</title>
   <meta name="description" content="Learn about the MLWGS Programming Club &mdash; our mission, pillars, and the students who run it." />
   <meta name="theme-color" content="#000000" />
+  <meta name="author" content="Arnav Shukla" />
+
+  <meta property="og:title" content="About Us | MLWGS Programming Club" />
+  <meta property="og:description" content="Learn about the MLWGS Programming Club — our mission, pillars, and leadership." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://techbyarnav.github.io/mlwgs-programming-club/about.html" />
+  <meta property="og:image" content="https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="About Us | MLWGS Programming Club" />
+  <meta name="twitter:description" content="Learn about the MLWGS Programming Club." />
+  <meta name="twitter:image" content="https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png" />
+
   <link rel="icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MLWGS Programming Club",
+    "description": "The official programming club of Maggie L. Walker Governor's School",
+    "url": "https://techbyarnav.github.io/mlwgs-programming-club/",
+    "logo": "https://techbyarnav.github.io/mlwgs-programming-club/assets/logo.png"
+  }
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <header class="header">
     <div class="nav-wrap">
       <a href="index.html" class="logo" aria-label="MLWGS Programming Club home">
-        <img src="assets/logo.png" alt="MLWGS dragon logo" />
+        <img src="assets/logo.png" alt="MLWGS dragon logo" loading="lazy" />
         <span class="name">MLWGS<span class="green">Programming</span> Club</span>
       </a>
-      <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: var(--s-12);">
+        <button class="theme-toggle" aria-label="Toggle light/dark mode" id="themeToggle">☀</button>
+        <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
       <nav class="nav-links-wrapper">
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
@@ -30,7 +61,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero" style="min-height: 45dvh;">
       <div class="hero-content">
         <h1>About Us</h1>
@@ -50,19 +81,19 @@
           We operate on the four pillars of Maggie L. Walker Governor&rsquo;s School:
         </p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-24); margin-bottom: var(--s-80);">
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Courage</h3>
             <p>Tackling hard problems, shipping imperfect code, and learning from every bug.</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Compassion</h3>
             <p>Helping teammates debug, mentoring newcomers, and building inclusive tech.</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Community</h3>
             <p>One room, one whiteboard, one repo &mdash; we grow stronger together.</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Collaboration</h3>
             <p>Pair programming, code reviews, and group projects that ship.</p>
           </article>
@@ -70,12 +101,12 @@
 
         <h2 class="reveal" style="margin-bottom: var(--s-32);">Who Runs the Club</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s-24);">
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Aklash Arun Kumar Soumya</h3>
             <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin-bottom: var(--s-12);">Co-Lead</p>
             <p>Co-leads the club, organizes workshops, and drives the competitive programming track.</p>
           </article>
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Ayman Mohammed</h3>
             <p style="font-family: var(--font-mono); font-size: var(--t-c); color: var(--green); margin-bottom: var(--s-12);">Co-Lead</p>
             <p>Co-leads the club, manages DragonsHack logistics, and runs the web development track.</p>
@@ -91,10 +122,17 @@
 
   <footer>
     <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:arnav.shukla2607@gmail.com">Email</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
       <p>Made By <strong>Arnav</strong> &bull; <a href="https://github.com/TechByArnav" target="_blank" rel="noopener noreferrer">github.com/TechByArnav</a></p>
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
   <script src="js/main.js"></script>
 </body>
 </html>
