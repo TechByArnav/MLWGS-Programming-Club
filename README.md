@@ -13,38 +13,44 @@ Official website for the Maggie L. Walker Governor's School Programming Club.
 
 ## Brand Palette (Black + Deep Green, NO yellow)
 
-| Role | Value | Token |
-|------|-------|-------|
-| Canvas (full black) | `#000000` | `--canvas` |
-| Card surface | `#0a0a0a` | `--surface` |
-| Elevated surface | `#111111` | `--surface-elev` |
-| Hairline borders | `#141414` | `--border` |
-| Primary text | `#e8e8e8` | `--text` |
-| Muted text | `#6b6b6b` | `--text-muted` |
-| Deep green | `#004d00` | `--green-dim` |
-| Bright matrix green | `#00ff41` | `--green` |
-| Green hover | `#33ff66` | `--green-hover` |
+| Role | Value |
+|------|-------|
+| Canvas (full black) | `#000000` |
+| Card surface | `#0a0a0a` |
+| Elevated surface | `#111111` |
+| Hairline borders | `#141414` |
+| Primary text | `#e8e8e8` |
+| Muted text | `#6b6b6b` |
+| Deep green | `#004d00` |
+| Bright matrix green | `#00ff41` |
+| Green hover | `#33ff66` |
 
 ## Logo
 
 - `assets/logo.png` — MLWGS dragon logo (your attached PNG)
-- `assets/logo.svg` — vector fallback
 
-## Nav Bar (fixed — horizontal row)
+## Nav Bar (horizontal row)
 
-- Logo on the left: green dragon icon + "MLWGS Programming Club"
-- Nav links on the right in a horizontal row: Home, About Us, DragonsHack, Contact
+- Logo on the left, nav links on the right
 - Active link shows a bright green underline
 - Sticky header with hairline bottom border
-- Mobile: hamburger menu toggles a vertical link list
+- Mobile: hamburger menu toggles vertical link list
 
-## Motion
+## Motion & Animation
 
-- Hero entrance animation (fade up with spring easing)
-- Scroll-reveal on all cards and sections (IntersectionObserver)
-- Springy hover transitions on buttons and cards
-- Smooth scroll for anchor links
-- Respects `prefers-reduced-motion`
+- **Hero entrance**: Fade-up with spring easing on title, subtitle, and buttons
+- **Hero background**: Pulsing radial glow, animated grid shift, 10 floating particles
+- **Parallax**: Hero content and glow move at different speeds on scroll
+- **Mouse interaction**: Particles subtly follow cursor movement
+- **Scroll reveals**: Cards and sections fade in when entering viewport
+- **Card hover**: Lift + green border glow + top border line
+- **Button hover**: Lift + green glow shadow
+- **Respects** `prefers-reduced-motion`
+
+## Leadership
+
+- **Aklash Arun Kumar Soumya** — Co-Lead
+- **Ayman Mohammed** — Co-Lead
 
 ## Deploy to GitHub Pages
 
