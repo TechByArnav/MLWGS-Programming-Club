@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initLoadingScreen();
   initPrefetch();
-  initColorShift();
   initViewTransitions();
   initCopyEmail();
   initCursorTrail();
@@ -43,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHapticFeedback();
   initSwipeNavigation();
   initScrollTextReveal();
-  initAccentRotation();
   initPerformanceMonitoring();
 });
 
@@ -398,7 +396,7 @@ function initInteractiveParticles() {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(45, 90, 61, ${p.alpha})`;
+      ctx.fillStyle = `rgba(61, 122, 82, ${p.alpha})`;
       ctx.fill();
     }
 
@@ -607,17 +605,6 @@ function initScrollTextReveal() {
   textRevealElements.forEach((el) => observer.observe(el));
 }
 
-// ── Accent Color Rotation (subtle 60s cycle) ──
-function initAccentRotation() {
-  let hue = 120;
-  setInterval(() => {
-    hue = (hue + 0.5) % 360;
-    // Only shift slightly around green (120-140)
-    const clampedHue = 120 + (Math.sin(hue * Math.PI / 180) * 10);
-    document.documentElement.style.setProperty('--green', `hsl(${clampedHue}, 40%, 35%)`);
-  }, 1000);
-}
-
 // ── Performance Monitoring ──
 function initPerformanceMonitoring() {
   if (!window.PerformanceObserver) return;
@@ -769,25 +756,6 @@ function initPrefetch() {
   });
 }
 
-// ── Color Shift on Scroll ──
-function initColorShift() {
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? scrollY / docHeight : 0;
-        // Shift hue from 120 (green) to 160 (cyan-green) and back
-        const hue = 120 + Math.sin(progress * Math.PI * 2) * 20;
-        document.documentElement.style.setProperty('--green', `hsl(${hue}, 100%, 45%)`);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
 // ── Ripple Effect on Buttons ──
 function initRippleEffect() {
   document.querySelectorAll('.btn').forEach((btn) => {
@@ -929,24 +897,6 @@ function initPrefetch() {
   });
 }
 
-// ── Color Shift on Scroll ──
-function initColorShift() {
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? scrollY / docHeight : 0;
-        const hue = 120 + Math.sin(progress * Math.PI * 2) * 15;
-        document.documentElement.style.setProperty('--green', `hsl(${hue}, 100%, 45%)`);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
 // ── View Transitions (if supported) ──
 function initViewTransitions() {
   if (!document.startViewTransition) return;
@@ -972,7 +922,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoadingScreen();
   initStickyCTA();
   initPrefetch();
-  initColorShift();
   initViewTransitions();
   initCopyEmail();
 });
