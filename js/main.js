@@ -155,8 +155,8 @@ function initFormEnhancements() {
 
     setTimeout(() => {
       btn.textContent = 'Sent!';
-      btn.style.background = '#00e639';
-      btn.style.color = '#000';
+      btn.style.background = '#084c27';
+      btn.style.color = '#f0ebe3';
 
       setTimeout(() => {
         btn.textContent = original;
@@ -396,7 +396,7 @@ function initInteractiveParticles() {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(61, 122, 82, ${p.alpha})`;
+      ctx.fillStyle = `rgba(8, 76, 39, ${p.alpha})`;
       ctx.fill();
     }
 
