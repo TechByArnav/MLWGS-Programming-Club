@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageTransitions();
   initInteractiveParticles();
   initMagneticButtons();
-  initThemeToggle();
   initScrollProgress();
   initBackToTop();
   initMobileMenuClose();
@@ -913,18 +912,7 @@ function initViewTransitions() {
   });
 }
 
-// Add new init calls
-document.addEventListener('DOMContentLoaded', () => {
-  initRippleEffect();
-  initTiltEffect();
-  initStatsCounter();
-  initAccordion();
-  initLoadingScreen();
-  initStickyCTA();
-  initPrefetch();
-  initViewTransitions();
-  initCopyEmail();
-});
+// (All init calls handled in main DOMContentLoaded above)
 
 // ── Cursor Trail ──
 function initCursorTrail() {
