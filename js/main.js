@@ -20,6 +20,31 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgress();
   initBackToTop();
   initMobileMenuClose();
+  initRippleEffect();
+  initTiltEffect();
+  initStatsCounter();
+  initAccordion();
+  initLoadingScreen();
+  initPrefetch();
+  initColorShift();
+  initViewTransitions();
+  initCopyEmail();
+  initCursorTrail();
+  initCommandPalette();
+  initMagneticButtons();
+  initThemeToggle();
+  initScrollProgress();
+  initParallax();
+  initParticleMotion();
+  initPageTransitions();
+  initInteractiveParticles();
+  // New features
+  initTouchRipple();
+  initHapticFeedback();
+  initSwipeNavigation();
+  initScrollTextReveal();
+  initAccentRotation();
+  initPerformanceMonitoring();
 });
 
 // ── Mobile navigation ──
@@ -196,51 +221,85 @@ function initParticleMotion() {
   }, { passive: true });
 }
 
-// ── Text Scramble Effect on Hero Title ──
+// ── Text Scramble Effect on Hero Title (Fixed) ──
 function initTextScramble() {
   const heroTitle = document.querySelector('.hero h1');
   if (!heroTitle) return;
 
+  // Store original HTML to restore later (preserves gradient-text span)
   const originalHTML = heroTitle.innerHTML;
-  const lines = originalHTML.split('<br>');
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~';
-  
-  const scrambledLines = lines.map((line) => {
-    const text = line.replace(/<[^>]*>/g, '').trim();
-    return text.split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
-  });
 
-  heroTitle.innerHTML = scrambledLines.join('<br>');
+  // Extract plain text lines (strip HTML tags)
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = originalHTML;
+  const textContent = tempDiv.textContent || tempDiv.innerText || '';
+  const lines = textContent.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
+
+  // If no newlines, split by <br> manually
+  if (lines.length <= 1) {
+    const brLines = originalHTML.split(/<br\s*\/?>/i).map((l) => l.replace(/<[^>]*>/g, '').trim()).filter((l) => l.length > 0);
+    if (brLines.length > 1) {
+      lines.length = 0;
+      lines.push(...brLines);
+    }
+  }
+
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+  // Create scrambled versions
+  const scrambledLines = lines.map((text) =>
+    text.split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('')
+  );
+
+  // Show scrambled text
+  heroTitle.textContent = scrambledLines.join('\n');
   heroTitle.style.opacity = '1';
   heroTitle.style.transform = 'translateY(0)';
+  heroTitle.style.whiteSpace = 'pre-line';
 
   let lineIndex = 0;
   let charIndex = 0;
-  const revealSpeed = 30;
+  const revealSpeed = 50;
 
   function revealNext() {
-    if (lineIndex >= lines.length) return;
+    if (lineIndex >= lines.length) {
+      // Restore original HTML with gradient span
+      heroTitle.innerHTML = originalHTML;
+      heroTitle.style.whiteSpace = '';
+      return;
+    }
 
-    const targetLine = lines[lineIndex].replace(/<[^>]*>/g, '').trim();
-    const currentLine = scrambledLines[lineIndex];
+    const targetLine = lines[lineIndex];
 
     if (charIndex < targetLine.length) {
-      const newText = targetLine.substring(0, charIndex + 1) + 
-        currentLine.substring(charIndex + 1).split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
-      scrambledLines[lineIndex] = newText;
-      heroTitle.innerHTML = scrambledLines.join('<br>');
+      // Build the revealed string
+      let revealed = targetLine.substring(0, charIndex + 1);
+      let remaining = '';
+      for (let i = charIndex + 1; i < targetLine.length; i++) {
+        remaining += chars[Math.floor(Math.random() * chars.length)];
+      }
+      scrambledLines[lineIndex] = revealed + remaining;
+      heroTitle.textContent = scrambledLines.join('\n');
       charIndex++;
       setTimeout(revealNext, revealSpeed);
     } else {
       scrambledLines[lineIndex] = targetLine;
-      heroTitle.innerHTML = scrambledLines.join('<br>');
+      heroTitle.textContent = scrambledLines.join('\n');
       lineIndex++;
       charIndex = 0;
-      setTimeout(revealNext, revealSpeed * 3);
+      if (lineIndex < lines.length) {
+        setTimeout(revealNext, revealSpeed * 2);
+      } else {
+        // All done, restore original HTML
+        setTimeout(() => {
+          heroTitle.innerHTML = originalHTML;
+          heroTitle.style.whiteSpace = '';
+        }, revealSpeed * 2);
+      }
     }
   }
 
-  setTimeout(revealNext, 500);
+  setTimeout(revealNext, 800);
 }
 
 // ── Smooth Page Transitions ──
@@ -339,7 +398,7 @@ function initInteractiveParticles() {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0, 230, 57, ${p.alpha})`;
+      ctx.fillStyle = `rgba(45, 90, 61, ${p.alpha})`;
       ctx.fill();
     }
 
@@ -460,6 +519,253 @@ function initBackToTop() {
 
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ── Touch Ripple ──
+function initTouchRipple() {
+  document.querySelectorAll('.btn, .card').forEach((el) => {
+    el.addEventListener('touchstart', (e) => {
+      const rect = el.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      const ripple = document.createElement('span');
+      ripple.className = 'touch-ripple';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+      ripple.style.marginLeft = -(Math.max(rect.width, rect.height) / 2) + 'px';
+      ripple.style.marginTop = -(Math.max(rect.width, rect.height) / 2) + 'px';
+      el.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 400);
+    }, { passive: true });
+  });
+}
+
+// ── Haptic Feedback ──
+function initHapticFeedback() {
+  if (!navigator.vibrate) return;
+
+  document.querySelectorAll('.btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      navigator.vibrate(10);
+    });
+  });
+}
+
+// ── Swipe Navigation ──
+function initSwipeNavigation() {
+  let startX = 0;
+  let startY = 0;
+  const pages = ['index.html', 'about.html', 'dragonshack.html', 'contact.html'];
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const currentIndex = pages.indexOf(currentPath);
+
+  if (currentIndex === -1) return;
+
+  document.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+
+    // Only trigger on horizontal swipes
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 80) {
+      if (diffX > 0 && currentIndex > 0) {
+        // Swipe right → previous page
+        document.body.style.opacity = '0';
+        setTimeout(() => { window.location.href = pages[currentIndex - 1]; }, 200);
+      } else if (diffX < 0 && currentIndex < pages.length - 1) {
+        // Swipe left → next page
+        document.body.style.opacity = '0';
+        setTimeout(() => { window.location.href = pages[currentIndex + 1]; }, 200);
+      }
+    }
+  }, { passive: true });
+}
+
+// ── Scroll-Triggered Text Reveal ──
+function initScrollTextReveal() {
+  const textRevealElements = document.querySelectorAll('.text-reveal');
+  if (!textRevealElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  textRevealElements.forEach((el) => observer.observe(el));
+}
+
+// ── Accent Color Rotation (subtle 60s cycle) ──
+function initAccentRotation() {
+  let hue = 120;
+  setInterval(() => {
+    hue = (hue + 0.5) % 360;
+    // Only shift slightly around green (120-140)
+    const clampedHue = 120 + (Math.sin(hue * Math.PI / 180) * 10);
+    document.documentElement.style.setProperty('--green', `hsl(${clampedHue}, 40%, 35%)`);
+  }, 1000);
+}
+
+// ── Performance Monitoring ──
+function initPerformanceMonitoring() {
+  if (!window.PerformanceObserver) return;
+
+  // Monitor LCP
+  try {
+    const lcpObserver = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const lastEntry = entries[entries.length - 1];
+      console.log('LCP:', Math.round(lastEntry.startTime), 'ms');
+    });
+    lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+  } catch (e) {}
+
+  // Monitor CLS
+  try {
+    let clsValue = 0;
+    const clsObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (!entry.hadRecentInput) {
+          clsValue += entry.value;
+        }
+      }
+      console.log('CLS:', clsValue.toFixed(4));
+    });
+    clsObserver.observe({ type: 'layout-shift', buffered: true });
+  } catch (e) {}
+}
+
+// ── Ripple Effect on Buttons ──
+function initRippleEffect() {
+  document.querySelectorAll('.btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+      ripple.style.marginLeft = -(Math.max(rect.width, rect.height) / 2) + 'px';
+      ripple.style.marginTop = -(Math.max(rect.width, rect.height) / 2) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+// ── Tilt Effect on Cards ──
+function initTiltEffect() {
+  const cards = document.querySelectorAll('.card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      card.style.transition = 'transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+      setTimeout(() => { card.style.transition = ''; }, 400);
+    });
+  });
+}
+
+// ── Stats Counter Animation ──
+function initStatsCounter() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  if (!statNumbers.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+        const duration = 2000;
+        const start = performance.now();
+        
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach((el) => observer.observe(el));
+}
+
+// ── Accordion FAQ ──
+function initAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) return;
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector('.faq-question');
+    if (!question) return;
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      faqItems.forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+}
+
+// ── Loading Screen ──
+function initLoadingScreen() {
+  const screen = document.querySelector('.loading-screen');
+  if (!screen) return;
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      screen.classList.add('hidden');
+      setTimeout(() => screen.remove(), 500);
+    }, 800);
+  });
+}
+
+// ── Prefetching on hover ──
+function initPrefetch() {
+  const links = document.querySelectorAll('a[href$=".html"]');
+  const prefetched = new Set();
+
+  links.forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      const href = link.getAttribute('href');
+      if (href && !prefetched.has(href) && !href.startsWith('http')) {
+        const prefetchLink = document.createElement('link');
+        prefetchLink.rel = 'prefetch';
+        prefetchLink.href = href;
+        document.head.appendChild(prefetchLink);
+        prefetched.add(href);
+      }
+    });
   });
 }
 
@@ -671,42 +977,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyEmail();
 });
 
-// ── Spotlight Cursor Effect ──
-function initSpotlight() {
-  const spotlight = document.getElementById('spotlight');
-  if (!spotlight) return;
-
-  // Only on desktop
-  if (window.matchMedia('(pointer: coarse)').matches) {
-    spotlight.style.display = 'none';
-    return;
-  }
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let spotlightX = 0;
-  let spotlightY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    spotlight.classList.add('active');
-  });
-
-  document.addEventListener('mouseleave', () => {
-    spotlight.classList.remove('active');
-  });
-
-  function updateSpotlight() {
-    spotlightX += (mouseX - spotlightX) * 0.1;
-    spotlightY += (mouseY - spotlightY) * 0.1;
-    spotlight.style.left = spotlightX + 'px';
-    spotlight.style.top = spotlightY + 'px';
-    requestAnimationFrame(updateSpotlight);
-  }
-  updateSpotlight();
-}
-
 // ── Cursor Trail ──
 function initCursorTrail() {
   const trail = document.getElementById('cursorTrail');
@@ -751,12 +1021,12 @@ function initCommandPalette() {
   if (!palette || !input || !results) return;
 
   const pages = [
-    { name: 'Home', url: 'index.html', icon: '🏠', desc: 'MLWGS Programming Club landing page' },
-    { name: 'About Us', url: 'about.html', icon: '📖', desc: 'Mission, pillars, and leadership' },
-    { name: 'DragonsHack', url: 'dragonshack.html', icon: '🐉', desc: 'Annual hackathon — coming soon' },
-    { name: 'Contact', url: 'contact.html', icon: '✉', desc: 'Get in touch with the club' },
-    { name: 'GitHub', url: 'https://github.com/TechByArnav', icon: '⭐', desc: 'Arnav\'s GitHub profile', external: true },
-    { name: 'Email', url: 'mailto:arnav.shukla2607@gmail.com', icon: '📧', desc: 'Send an email', external: true },
+    { name: 'Home', url: 'index.html', icon: 'H', desc: 'MLWGS Programming Club landing page' },
+    { name: 'About Us', url: 'about.html', icon: 'A', desc: 'Mission, pillars, and leadership' },
+    { name: 'DragonsHack', url: 'dragonshack.html', icon: 'D', desc: 'Annual hackathon — coming soon' },
+    { name: 'Contact', url: 'contact.html', icon: 'C', desc: 'Get in touch with the club' },
+    { name: 'GitHub', url: 'https://github.com/TechByArnav', icon: 'G', desc: 'Arnav\'s GitHub profile', external: true },
+    { name: 'Email', url: 'mailto:arnav.shukla2607@gmail.com', icon: 'E', desc: 'Send an email', external: true },
   ];
 
   let selectedIndex = 0;
