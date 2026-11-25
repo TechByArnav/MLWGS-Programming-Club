@@ -1607,6 +1607,13 @@ body.light .header {
   background-clip: text;
 }
 
+body.light .hero h1 span.gradient-text {
+  background: linear-gradient(135deg, var(--text) 0%, var(--green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────
    Drop Cap (apply .drop-cap to first paragraph)
    ───────────────────────────────────────────────────────────────────────── */
